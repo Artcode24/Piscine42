@@ -6,14 +6,14 @@
 /*   By: agouzy <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 02:10:08 by agouzy            #+#    #+#             */
-/*   Updated: 2024/10/19 02:12:57 by agouzy           ###   ########.fr       */
+/*   Updated: 2024/10/19 02:24:01 by agouzy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_str_is_printable(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -21,7 +21,7 @@ int	ft_str_is_printable(char *str)
 			return (0);
 		i++;
 	}
-	return 1;
+	return (1);
 }
 
 /*

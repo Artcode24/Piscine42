@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouzy <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 02:08:13 by agouzy            #+#    #+#             */
-/*   Updated: 2024/10/19 02:23:37 by agouzy           ###   ########.fr       */
+/*   Created: 2024/10/20 00:29:23 by agouzy            #+#    #+#             */
+/*   Updated: 2024/10/20 00:44:13 by agouzy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_uppercase(char *str)
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	int	i;
+	unsigned int	len;
+	unsigned int	i;
 
+	len = 0;
+	while (src[len] != '\0')
+		len++;
 	i = 0;
-	while (str[i] != '\0')
+	while (src[i] != '\0' && i < size - 1)
 	{
-		if (str[i] < 'A' || str[i] > 'Z')
-			return (0);
+		dest[i] = src[i];
 		i++;
 	}
-	return (1);
+	dest[i] = '\0';
+	return (len);
 }
 
 /*
 #include <stdio.h>
 int	main(void)
 {
-	ft_str_is_uppercase();
+	char dest[20];
+	unsigned int	len;
+
+	len = ft_strlcpy(dest, "Hello world", 3);
+
+	printf("len = %i, dest = %s\n", len, dest);
 }
 */
