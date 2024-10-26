@@ -1,0 +1,46 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "f1",
+        "command": "python.execInTerminal"
+    },
+    {
+        "key": "f1",
+        "command": "code-runner.run"
+    },
+    {
+        "key": "ctrl+alt+n",
+        "command": "-code-runner.run"
+    },
+    {
+        "key": "f2",
+        "command": "python.execInTerminal-icon"
+    },
+    {
+        "key": "f4",
+        "command": "editor.action.rename",
+        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "f2",
+        "command": "-editor.action.rename",
+        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+	"key": "Shift+[",
+	"command": "runCommands",
+	"args":{
+	  "commands": [
+	    "editor.action.insertLineAfter",
+	    {
+	      "command": "editor.action.insertSnippet",
+	      "args": {
+		"snippet": "{\n\t$0\n}"
+	      }
+	    }
+	  ]
+	}
+      }
+      
+
+]
