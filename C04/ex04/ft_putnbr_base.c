@@ -6,13 +6,13 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 02:04:42 by arthur            #+#    #+#             */
-/*   Updated: 2024/10/28 01:34:46 by arthur           ###   ########.fr       */
+/*   Updated: 2024/10/29 02:42:21 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_strlen(char *base)
+long	ft_strlen(char *base)
 {
 	int	len;
 
@@ -47,9 +47,9 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr_base_recursive(long nbr, char *base, int base_len)
+void	ft_putnbr_base_recursive(long nbr, char *base, long base_len)
 {
-	if (nbr > base_len)
+	if (nbr >= base_len)
 		ft_putnbr_base_recursive(nbr / base_len, base, base_len);
 	ft_putchar(base[nbr % base_len]);
 }
@@ -57,7 +57,7 @@ void	ft_putnbr_base_recursive(long nbr, char *base, int base_len)
 void	ft_putnbr_base(int nbr, char *base)
 {
 	int		i;
-	int		base_len;
+	long	base_len;
 	long	nbr_long;
 
 	nbr_long = (long)nbr;

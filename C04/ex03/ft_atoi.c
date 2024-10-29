@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 00:47:18 by arthur            #+#    #+#             */
-/*   Updated: 2024/10/25 01:47:07 by arthur           ###   ########.fr       */
+/*   Updated: 2024/10/29 02:19:46 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_atoi(char *str)
 		nb += str[i] - 48;
 		i++;
 	}
-	return (nb);
+	return (nb * sign);
 }
 
 /* #include <stdio.h>
