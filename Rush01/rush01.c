@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/14 01:51:39 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/14 08:26:35 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ int	ft_check(int line[], int index, int number)
 	return (1);
 }
 
-void	ft_fill(int line[], int index, int size)
+void	ft_fill(int line[], int index, int base)
 {
 	int	number;
 
-	number = 1;
-	while (number <= size)
+	number = base;
+	while (number <= base + 3)
 	{
-		if (ft_check(line, index, number))
-			{
-				line[index] = number;	
-				index++;	
-			}
+		if (ft_check(line, index, (number - 1) % 4 + 1))
+		{
+			line[index] = (number - 1) % 4 + 1;
+			return;	
+		}
 		number++;
 	}
 }
@@ -45,23 +45,17 @@ void	ft_fill(int line[], int index, int size)
 
 int	main(void)
 {
-	int	line[4] = {1, 4, 0, 0};
-	int	size;
+	int	line[4] = {0, 0, 0, 0};
 	int	index;
+	int	base;
 
-	index = 2;
-	size = 4;
+	index = 0;
+	base = 4;
 
-	while (index < size)
-	{
-		ft_fill(line, index, size);
-		index++;
-	}
-
-	int i = 0;
-	while (i < size)
-	{
-		printf("%d\n", line[i]);
-		i++;
-	}
+	for (; index < 4; index++)
+		ft_fill(line, index, base);
+	
+	for (int i = 0; i < 4; i++)
+		printf("%d ", line[i]);
+	printf("\n");
 }
