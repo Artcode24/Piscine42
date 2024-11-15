@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/14 08:26:35 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/15 14:16:57 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,29 @@ void	ft_fill(int line[], int index, int base)
 	}
 }
 
+int	ft_calcul(int line[])
+{
+	if (line[0] == 4)
+		return (1);
+
+	else if (line[1] == 4)
+		return (2);
+
+	else if (line[2] == 4)
+	{
+		// 2 ou 3 (entre 2 et index+1)
+		if (line[0] < line[1])
+			return (3);
+		else
+			return (2);
+	}
+
+	else if (line[3] == 4)
+	{
+		// entre 2 et 4 (entre 2 et index+1)
+	}
+}
+
 
 int	main(void)
 {
@@ -50,7 +73,7 @@ int	main(void)
 	int	base;
 
 	index = 0;
-	base = 4;
+	base = 1;
 
 	for (; index < 4; index++)
 		ft_fill(line, index, base);
