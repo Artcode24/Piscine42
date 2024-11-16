@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_combn.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouzy <marvin@student.41.fr>              +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:11:40 by agouzy            #+#    #+#             */
-/*   Updated: 2024/10/14 23:39:00 by agouzy           ###   ########.fr       */
+/*   Updated: 2024/11/14 02:39:34 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_print_combn(int n)
 	}
 }
 
-/*
+/* 
 #include <stdlib.h>
 int	main(int argc, char *argv[])
 {
@@ -58,5 +58,4 @@ int	main(int argc, char *argv[])
 		return -1;
 	ft_print_combn(atoi(argv[1]));
 	return (0);
-}
-*/
+} */

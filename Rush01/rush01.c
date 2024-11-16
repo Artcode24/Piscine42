@@ -6,11 +6,12 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/15 14:16:57 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/16 04:00:33 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int	ft_check(int line[], int index, int number)
 {
@@ -42,31 +43,28 @@ void	ft_fill(int line[], int index, int base)
 	}
 }
 
-int	ft_calcul(int line[])
+int	ft_calcul_line(int line[], int array_size)
 {
-	if (line[0] == 4)
-		return (1);
+	int	i;
+	int	temp;
+	int	view_count;
 
-	else if (line[1] == 4)
-		return (2);
-
-	else if (line[2] == 4)
+	i = 0;
+	temp = line[0];
+	view_count = 1;
+	while (i < array_size)
 	{
-		// 2 ou 3 (entre 2 et index+1)
-		if (line[0] < line[1])
-			return (3);
-		else
-			return (2);
+		if (temp < line[i])
+		{
+			view_count++;
+			temp = line[i];
+		}
+		i++;
 	}
-
-	else if (line[3] == 4)
-	{
-		// entre 2 et 4 (entre 2 et index+1)
-	}
+	return (view_count);
 }
 
-
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	int	line[4] = {0, 0, 0, 0};
 	int	index;
@@ -75,8 +73,11 @@ int	main(void)
 	index = 0;
 	base = 1;
 
-	for (; index < 4; index++)
+	while (index < 4)
+	{
 		ft_fill(line, index, base);
+		index++;
+	}
 	
 	for (int i = 0; i < 4; i++)
 		printf("%d ", line[i]);
