@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/16 04:16:45 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/19 18:07:20 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_check(int line[], int index, int number)
 	return (1);
 }
 
-void	ft_fill(int line[], int index, int base)
+void	ft_fill_case(int line[], int index, int base)
 {
 	int	number;
 
@@ -69,17 +69,28 @@ int	main(int argc, char *argv[])
 	int	line[4] = {0, 0, 0, 0};
 	int	index;
 	int	base;
+	int	attendu;
 
-	index = 0;
+
+	if (argc != 2)
+		return (1);
+
 	base = 1;
+	attendu = atoi(argv[1]);
 
-	while (index < 4)
+	// Put it in a function called ft_fill_line
+	while ((ft_calcul_line(line, 4) != attendu) || line[0] == 0)
 	{
-		ft_fill(line, index, base);
-		index++;
+		index = 0;
+		while (index < 4)
+		{
+			ft_fill_case(line, index, base);
+			index++;
+		}
+		base++;
 	}
-	
-	/* for (int i = 0; i < 4; i++)
+
+	for (int i = 0; i < 4; i++)
 		printf("%d ", line[i]);
-	printf("\n"); */
+	printf("\n");
 }
