@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/16 04:00:33 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/16 04:16:45 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char *argv[])
 		index++;
 	}
 	
-	for (int i = 0; i < 4; i++)
+	/* for (int i = 0; i < 4; i++)
 		printf("%d ", line[i]);
-	printf("\n");
+	printf("\n"); */
 }
