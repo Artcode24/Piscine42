@@ -16,7 +16,7 @@ void	ft_permute(int line[], int l, int r)
 	if (l == r)
 	{
 		i = 0;
-		while (i < 3)
+		while (i < 4)
 		{
 			printf("%c", line[i]);
 			i++;
@@ -39,7 +39,7 @@ void	ft_permute(int line[], int l, int r)
 
 int	main(void)
 {
-	int	str[] = {'A', 'B', 'C'};
-	int	n = 3;
+	int	str[] = {'A', 'B', 'C', 'D'};
+	int	n = 4;
 	ft_permute(str, 0, n - 1);
 }

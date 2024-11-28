@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/28 14:25:51 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:45:17 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ int	ft_check(int line[], int index, int number)
 		i++;
 	}
 	return (1);
-}
-
-void	ft_fill_case(int line[], int index, int min_number)
-{
-	int	number;
-
-	number = min_number;
-	while (number <= min_number + 3)
-	{
-		if (ft_check(line, index, (number - 1) % 4 + 1))
-		{
-			line[index] = (number - 1) % 4 + 1;
-			return;	
-		}
-		number++;
-	}
 }
 
 int	ft_calcul_line(int line[], int array_size)
@@ -62,18 +46,6 @@ int	ft_calcul_line(int line[], int array_size)
 		i++;
 	}
 	return (view_count);
-}
-
-void	ft_fill_line(int line[], int min_number)
-{
-	int	index;
-
-	index = 0;
-	while (index < 4)
-	{
-		ft_fill_case(line, index, min_number);
-		index++;
-	}
 }
 
 int	main(int argc, char *argv[])
