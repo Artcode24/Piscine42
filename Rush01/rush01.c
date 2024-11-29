@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/28 15:45:17 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:47:53 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,37 +48,79 @@ int	ft_calcul_line(int line[], int array_size)
 	return (view_count);
 }
 
-int	main(int argc, char *argv[])
+int	ft_reverse_calcul_line(int line[], int array_size)
 {
-	int	line[4] = {0, 0, 0, 0};
-	int	index;
-	int	min_number;
-	int	expected;
+	int	i;
+	int	temp;
+	int	view_count;
 
-	// It takes a parameters to check how many boxes we should see
-	if (argc != 2)
-		return (1);
-
-	expected = atoi(argv[1]);
-
-	// This loop runs as long as we don't see the correct amount of boxes
-	min_number = 1;
-	while ((ft_calcul_line(line, 4) != expected) || line[0] == 0)
+	i = array_size - 1;
+	temp = line[i];
+	view_count = 1;
+	while (i >= 0)
 	{
-		ft_fill_line(line, min_number);
-		min_number++;
+		if (temp < line[i])
+		{
+			view_count++;
+			temp = line[i];
+		}
+		i--;
+	}
+	return (view_count);
+}
+
+void	ft_swap(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void	ft_permute(int line[], int possibilities[][4], int *i, int l, int r)
+{
+	int	j;
+
+	if (l == r)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			possibilities[*i][j] = line[j];
+			j++;
+		}
+		(*i)++;
+	}
+	else
+	{
+		j = l;
+		while (j <= r)
+		{
+			ft_swap(&line[l], &line[j]);
+			ft_permute(line, possibilities, i, l + 1, r);
+			ft_swap(&line[l], &line[j]);
+			j++;
+		}
 	}
 
+}
 
-	// Start the loop again while changing at least one element. > ft_line_compare
-	// If it's not possible, go back to the initial state.
-	// Maybe use a copy ? And use a ft_line_compare
-	// Or maybe rather run an inner loop inside the first one, as long as ft_calcul == expected
-
-	// CHANGER L'INDEX APRES LE CHIFFRE LE PLUS GRAND UNE FOIS QUE FT_CALCUL RETOURNE EXPECTED
+int	main(int argc, char *argv[])
+{
+	int	line[] = {'A', 'B', 'C', 'D'};
+	int	n = 4;
+	int	possibilities[24][4];
 	
-	// Print the line to test
-	for (int i = 0; i < 4; i++)
-		printf("%d ", line[i]);
-	printf("\n");
+	int	i = 0;
+	ft_permute (line, possibilities, &i, 0, n - 1);
+
+	for (int i = 0; i < 24; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			printf("%c", possibilities[i][j]);
+		}
+		printf("\n");
+	}
 }
