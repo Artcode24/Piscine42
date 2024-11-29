@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/28 17:47:53 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/29 05:23:17 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,40 @@ void	ft_permute(int line[], int possibilities[][4], int *i, int l, int r)
 
 }
 
+int	**ft_malloc_possibilities(size)
+{
+	int	**possibilities;
+	int	i;
+	int	j;
+	
+	possibilities = malloc(size * sizeof(int *));
+	if (!possibilities)
+		return (NULL);
+
+	i = 0;
+	while (i < size)
+	{
+		possibilities[i] = malloc(size * sizeof(int));
+		if (!possibilities[i])
+		{
+			j = 0;
+			while (j < i)
+				free(possibilities[j++]);
+			free(possibilities);
+			return (NULL);
+		}
+		i++;
+	}
+	return (possibilities);
+}
+
 int	main(int argc, char *argv[])
 {
 	int	line[] = {'A', 'B', 'C', 'D'};
 	int	n = 4;
-	int	possibilities[24][4];
+	int	**possibilities;
+
+	possibilities = ft_malloc_possibilities(4);
 	
 	int	i = 0;
 	ft_permute (line, possibilities, &i, 0, n - 1);
