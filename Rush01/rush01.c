@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/29 05:23:17 by arthur           ###   ########.fr       */
+/*   Updated: 2024/11/30 19:46:21 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,15 @@ void	ft_swap(int *a, int *b)
 	*b = temp;
 }
 
-void	ft_permute(int line[], int possibilities[][4], int *i, int l, int r)
+int	ft_factorial(int nb)
+{
+	if (nb == 1)
+		return (1);
+	else
+		return (nb * ft_factorial(nb - 1));
+}
+
+void	ft_permute(int line[], int **poss, int *i, int l, int r)
 {
 	int	j;
 
@@ -87,7 +95,7 @@ void	ft_permute(int line[], int possibilities[][4], int *i, int l, int r)
 		j = 0;
 		while (j < 4)
 		{
-			possibilities[*i][j] = line[j];
+			poss[*i][j] = line[j];
 			j++;
 		}
 		(*i)++;
@@ -98,57 +106,85 @@ void	ft_permute(int line[], int possibilities[][4], int *i, int l, int r)
 		while (j <= r)
 		{
 			ft_swap(&line[l], &line[j]);
-			ft_permute(line, possibilities, i, l + 1, r);
+			ft_permute(line, poss, i, l + 1, r);
 			ft_swap(&line[l], &line[j]);
 			j++;
 		}
 	}
-
 }
 
-int	**ft_malloc_possibilities(size)
+int	**ft_malloc_poss(int size, int nb_poss)
 {
-	int	**possibilities;
+	int	**poss;
 	int	i;
 	int	j;
 	
-	possibilities = malloc(size * sizeof(int *));
-	if (!possibilities)
+	poss = malloc(nb_poss * sizeof(int *));
+	if (!poss)
 		return (NULL);
 
 	i = 0;
-	while (i < size)
+	while (i < nb_poss)
 	{
-		possibilities[i] = malloc(size * sizeof(int));
-		if (!possibilities[i])
+		poss[i] = malloc(size * sizeof(int));
+  		if (!poss[i])
 		{
 			j = 0;
 			while (j < i)
-				free(possibilities[j++]);
-			free(possibilities);
+				free(poss[j++]);
+			free(poss);
 			return (NULL);
 		}
 		i++;
 	}
-	return (possibilities);
+	return (poss);
+}
+
+int	**ft_malloc_grid(int size_x, int size_y)
+{
+	int	**grid;
+	int	i;
+	int	j;
+
+	grid = malloc(size_y * sizeof(int *));
+	if (!grid)
+		return (NULL);
+
+	i = 0;
+	while (i < size_x)
+	{
+		grid[i] = malloc(size_x * sizeof(int));
+		i++;
+		if (!grid[i])
+		{
+			j = 0;
+			while (j < i)
+				free(grid[j++]);
+			free(grid);
+			return (NULL);
+		}
+	}
+	return (grid);
 }
 
 int	main(int argc, char *argv[])
 {
-	int	line[] = {'A', 'B', 'C', 'D'};
+	int	line[] = {'1', '2', '3', '4'};
 	int	n = 4;
-	int	**possibilities;
+	int	**poss;
+	int 	nb_poss;
 
-	possibilities = ft_malloc_possibilities(4);
+	nb_poss = ft_factorial(n);
+	poss = ft_malloc_poss(n, nb_poss);
 	
 	int	i = 0;
-	ft_permute (line, possibilities, &i, 0, n - 1);
+	ft_permute (line, poss, &i, 0, n - 1);
 
-	for (int i = 0; i < 24; i++)
+	for (int i = 0; i < nb_poss; i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			printf("%c", possibilities[i][j]);
+			printf("%c", poss[i][j]);
 		}
 		printf("\n");
 	}
