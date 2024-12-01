@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/30 19:46:21 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/01 10:04:02 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_factorial(int nb)
 		return (nb * ft_factorial(nb - 1));
 }
 
-void	ft_permute(int line[], int **poss, int *i, int l, int r)
+void	ft_fill_poss(int line[], int **poss, int *i, int l, int r)
 {
 	int	j;
 
@@ -106,19 +106,21 @@ void	ft_permute(int line[], int **poss, int *i, int l, int r)
 		while (j <= r)
 		{
 			ft_swap(&line[l], &line[j]);
-			ft_permute(line, poss, i, l + 1, r);
+			ft_fill_poss(line, poss, i, l + 1, r);
 			ft_swap(&line[l], &line[j]);
 			j++;
 		}
 	}
 }
 
-int	**ft_malloc_poss(int size, int nb_poss)
+int	**ft_malloc_poss(int size)
 {
 	int	**poss;
+	int	nb_poss;
 	int	i;
 	int	j;
 	
+	nb_poss = ft_factorial(size);
 	poss = malloc(nb_poss * sizeof(int *));
 	if (!poss)
 		return (NULL);
@@ -154,7 +156,6 @@ int	**ft_malloc_grid(int size_x, int size_y)
 	while (i < size_x)
 	{
 		grid[i] = malloc(size_x * sizeof(int));
-		i++;
 		if (!grid[i])
 		{
 			j = 0;
@@ -163,23 +164,53 @@ int	**ft_malloc_grid(int size_x, int size_y)
 			free(grid);
 			return (NULL);
 		}
+		i++;
 	}
 	return (grid);
 }
 
 int	main(int argc, char *argv[])
 {
-	int	line[] = {'1', '2', '3', '4'};
-	int	n = 4;
+	int	line[] = {1, 2, 3, 4};
+	int	line_length = 4;
 	int	**poss;
-	int 	nb_poss;
-
-	nb_poss = ft_factorial(n);
-	poss = ft_malloc_poss(n, nb_poss);
+	int	**grid;
+	
+	grid = ft_malloc_grid(4, 4); // Modifier le 4 avec une variable
+	poss = ft_malloc_poss(line_length);
 	
 	int	i = 0;
-	ft_permute (line, poss, &i, 0, n - 1);
+	ft_fill_poss(line, poss, &i, 0, line_length - 1);
+	
+	
+	// Etat initial de la grille (1,2,3,4 partout)
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			grid[i][j] = poss[0][j];
+		}
+	}
 
+	for (int i = 0; i < 4; i++) // On parcours chaque ligne de la grille
+	{
+		
+	}
+	
+
+
+
+/* 	// Affiche la grille
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			printf("%d ", grid[i][j]);
+		}
+		printf("\n");
+	} */
+
+	/* // Affiche toutes les possibilites
 	for (int i = 0; i < nb_poss; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -187,5 +218,5 @@ int	main(int argc, char *argv[])
 			printf("%c", poss[i][j]);
 		}
 		printf("\n");
-	}
+	} */
 }
