@@ -6,22 +6,28 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/01 10:04:02 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/01 11:26:14 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_check(int line[], int index, int number)
+int	ft_check_line(int line[], int array_size)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (i < index)
+	while (i < array_size)
 	{
-		if (line[i] == number)
-			return (0);
+		j = 0;
+		while (j < i)
+		{
+			if (line[i] == line[j])
+				return (0);
+			j++;
+		}
 		i++;
 	}
 	return (1);
@@ -169,6 +175,17 @@ int	**ft_malloc_grid(int size_x, int size_y)
 	return (grid);
 }
 
+int	ft_check_all(int line[], int line_cross[], int array_size, int exp, int exp_reverse)
+{
+	if (!ft_check_line(line_cross, array_size))
+		return (0);
+	if (!(ft_calcul_line(line, array_size) == exp))
+		return (0);
+	if (!(ft_reverse_calcul_line(line, array_size) == exp_reverse))
+		return (0);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	int	line[] = {1, 2, 3, 4};
@@ -192,10 +209,13 @@ int	main(int argc, char *argv[])
 		}
 	}
 
-	for (int i = 0; i < 4; i++) // On parcours chaque ligne de la grille
+	/* for (int i = 0; i < 4; i++) // On parcours chaque ligne de la grille
 	{
 		
-	}
+	} */
+
+	int test[] = {4, 2, 1, 4};
+	printf("%d", ft_check_line(test, 4));
 	
 
 
