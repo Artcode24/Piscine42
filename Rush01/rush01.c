@@ -6,14 +6,14 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/02 21:54:19 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/03 11:34:20 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_check_line(int line[], int array_size)
+int	ft_check_vertical(int line_vertical[], int array_size)
 {
 	int	i;
 	int	j;
@@ -24,7 +24,7 @@ int	ft_check_line(int line[], int array_size)
 		j = 0;
 		while (j < i)
 		{
-			if (line[i] == line[j])
+			if (line_vertical[i] == line[j])
 				return (0);
 			j++;
 		}
@@ -33,7 +33,7 @@ int	ft_check_line(int line[], int array_size)
 	return (1);
 }
 
-int	ft_calcul_line(int line[], int array_size)
+int	ft_calcul_l_r(int line[], int array_size)
 {
 	int	i;
 	int	temp;
@@ -54,7 +54,91 @@ int	ft_calcul_line(int line[], int array_size)
 	return (view_count);
 }
 
-int	ft_reverse_calcul_line(int line[], int array_size)
+int	ft_calcul_r_l(int line[], int array_size)
+{
+	int	i;
+	int	temp;
+	int	view_count;
+
+	i = array_size - 1;
+	temp = line[i];
+	view_count = 1;
+	while (i >= 0)
+	{
+		if (temp < line[i])
+		{
+			view_count++;
+			temp = line[i];
+		}
+		i--;
+	}
+	return (view_count);
+}
+
+int	ft_calcul_u_d(int line_vertical[], int array_size)
+{
+	int	i;
+	int	temp;
+	int	view_count;
+
+	i = 0;
+	temp = line[0];
+	view_count = 1;
+	while (i < array_size)
+	{
+		if (temp < line[i])
+		{
+			view_count++;
+			temp = line[i];
+		}
+		i++;
+	}
+	return (view_count);
+}
+
+int	ft_calcul_d_u(int line_vertical[], int array_size)
+{
+	int	i;
+	int	temp;
+	int	view_count;
+
+	i = array_size - 1;
+	temp = line[i];
+	view_count = 1;
+	while (i >= 0)
+	{
+		if (temp < line[i])
+		{
+			view_count++;
+			temp = line[i];
+		}
+		i--;
+	}
+	return (view_count);
+}
+
+int	ft_calcul_temp_u_d(int line_vertical[], int index_current)
+{
+	int	i;
+	int	temp;
+	int	view_count;
+
+	i = 0;
+	temp = line[0];
+	view_count = 1;
+	while (i < index_current)
+	{
+		if (temp < line[i])
+		{
+			view_count++;
+			temp = line[i];
+		}
+		i++;
+	}
+	return (view_count);
+}
+
+int	ft_calcul_temp_d_u(int line_vertical[], int index_current)
 {
 	int	i;
 	int	temp;
@@ -175,17 +259,6 @@ int	**ft_malloc_grid(int size_x, int size_y)
 	return (grid);
 }
 
-int	ft_check_all(int line[], int line_cross[], int array_size, int exp, int exp_reverse)
-{
-	if (!ft_check_line(line_cross, array_size))
-		return (0);
-	if (!(ft_calcul_line(line, array_size) == exp))
-		return (0);
-	if (!(ft_reverse_calcul_line(line, array_size) == exp_reverse))
-		return (0);
-	return (1);
-}
-
 int	main(int argc, char *argv[])
 {
 	int	line[] = {1, 2, 3, 4};
@@ -200,24 +273,19 @@ int	main(int argc, char *argv[])
 	ft_fill_poss(line, poss, &i, 0, line_length - 1);
 	
 	
-	// Etat initial de la grille (1,2,3,4 partout)
-	for (int i = 0; i < 4; i++)
+	for (int i = 0, k = 0; i < 4; i++) // On parcours chaque ligne de la grille
 	{
-		for (int j = 0; j < 4; j++)
+		do
 		{
-			grid[i][j] = poss[0][j];
+			for (int j = 0; j < 4; j++)
+			{
+				grid[i][j] = poss[k][j];
+				j++;
+			}
+			k++;
 		}
+		while (/* check_all not good */);
 	}
-
-	/* for (int i = 0; i < 4; i++) // On parcours chaque ligne de la grille
-	{
-		
-	} */
-
-	int test[] = {4, 2, 1, 4};
-	printf("%d", ft_check_line(test, 4));
-	
-
 
 
 /* 	// Affiche la grille
@@ -230,13 +298,13 @@ int	main(int argc, char *argv[])
 		printf("\n");
 	} */
 
-	/* // Affiche toutes les possibilites
-	for (int i = 0; i < nb_poss; i++)
+	// Affiche toutes les possibilites
+	for (int i = 0; i < 24; i++) // 24 est hardcode et est egal a ft_factorial
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			printf("%c", poss[i][j]);
+			printf("%i", poss[i][j]);
 		}
 		printf("\n");
-	} */
+	}
 }
