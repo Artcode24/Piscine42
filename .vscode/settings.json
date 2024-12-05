@@ -1,0 +1,15 @@
+{
+	"editor.tabSize": 8,
+	"editor.stickyScroll.enabled": false,
+	"files.associations": {
+		"*html": "html",
+		"array": "c",
+		"deque": "c",
+		"string": "c",
+		"unordered_map": "c",
+		"vector": "c",
+		"string_view": "c",
+		"initializer_list": "c"
+	},
+
+} 
