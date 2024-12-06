@@ -6,118 +6,108 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/04 13:46:36 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/06 14:55:25 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_check_vertical_repeat(int line_vertical[], int array_size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < array_size)
-	{
-		j = 0;
-		while (j < i)
-		{
-			if (line_vertical[i] == line_vertical[j])
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	ft_calcul_l_r(int line[], int array_size)
+int	ft_calcul_l_r(int **grid, int array_size, int expected_left, int current_row)
 {
 	int	i;
 	int	temp;
 	int	view_count;
 
 	i = 0;
-	temp = line[0];
+	temp = grid[current_row][0];
 	view_count = 1;
 	while (i < array_size)
 	{
-		if (temp < line[i])
+		if (temp < grid[current_row][i])
 		{
 			view_count++;
-			temp = line[i];
+			temp = grid[current_row][i];
 		}
 		i++;
 	}
-	return (view_count);
+	
+	if (view_count == expected_left)
+		return (1);
+	else
+		return(0);
 }
 
-int	ft_calcul_r_l(int line[], int array_size)
+int	ft_calcul_r_l(int **grid, int array_size, int expected_right, int current_row)
 {
 	int	i;
 	int	temp;
 	int	view_count;
 
 	i = array_size - 1;
-	temp = line[i];
+	temp = grid[current_row][array_size];
 	view_count = 1;
-	while (i >= 0)
+	while (i > 0)
 	{
-		if (temp < line[i])
+		if (temp < grid[current_row][i])
 		{
 			view_count++;
-			temp = line[i];
+			temp = grid[current_row][i];
 		}
 		i--;
 	}
-	return (view_count);
+	
+	if (view_count == expected_right)
+		return (1);
+	else
+		return(0);
 }
 
-int	ft_calcul_temp_u_d(int **grid, int index_current)
+int	ft_calcul_u_d(int **grid, int col, int expected_up, int current_row)
 {
 	int	i;
-	int	temp;
 	int	view_count;
+	int	temp;
 
-	i = 0;
-	temp = line_vertical[0];
 	view_count = 1;
-	while (i < index_current)
+	
+	temp = grid[0][col];
+	i = 0;
+	while (i < current_row)
 	{
-		if (temp < line_vertical[i])
-		{
+		if (temp < grid[i][col])
 			view_count++;
-			temp = line_vertical[i];
-		}
+			temp = grid[i][col];
 		i++;
 	}
-	return (view_count);
+	if (view_count <= expected_up)
+		return (1);
+	else
+		return (0);
 }
 
-int	ft_calcul_temp_d_u(int **grid, int index_current)
+int	ft_calcul_d_u(int **grid, int col, int expected_down, int current_row)
 {
 	int	i;
-	int	temp;
 	int	view_count;
+	int	temp;
 
-	i = index_current - 1;
-	temp = line_vertical[i];
 	view_count = 1;
-	while (i >= 0)
+	
+	temp = grid[current_row][col];
+	i = current_row - 1;
+	while (i > 0)
 	{
-		if (temp < line_vertical[i])
-		{
+		if (temp < grid[i][col])
 			view_count++;
-			temp = line_vertical[i];
-		}
+			temp = grid[i][col];
 		i--;
 	}
-	return (view_count);
+	if (view_count <= expected_down)
+		return (1);
+	else
+		return (0);
 }
-
-
 
 int	ft_check_repeat(int **grid, int size_hor, int size_ver)
 {
@@ -144,9 +134,6 @@ int	ft_check_repeat(int **grid, int size_hor, int size_ver)
 	}
 	return (1);
 }
-
-
-
 
 void	ft_swap(int *a, int *b)
 {
@@ -272,7 +259,7 @@ int	main(int argc, char *argv[])
 			}
 			k++;
 		}
-		while ( WRONG );
+		while ( /* Conditions not met */ );
 	}
 
 	for (int i = 0; i < 4; i++)
