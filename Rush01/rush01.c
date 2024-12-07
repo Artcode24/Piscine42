@@ -6,14 +6,14 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/06 14:55:25 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/07 11:45:57 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_calcul_l_r(int **grid, int array_size, int expected_left, int current_row)
+int	ft_calcul_left(int **grid, int size_hor, int exp_left, int current_row)
 {
 	int	i;
 	int	temp;
@@ -22,116 +22,141 @@ int	ft_calcul_l_r(int **grid, int array_size, int expected_left, int current_row
 	i = 0;
 	temp = grid[current_row][0];
 	view_count = 1;
-	while (i < array_size)
-	{
-		if (temp < grid[current_row][i])
-		{
-			view_count++;
-			temp = grid[current_row][i];
-		}
-		i++;
-	}
-	
-	if (view_count == expected_left)
-		return (1);
-	else
-		return(0);
-}
-
-int	ft_calcul_r_l(int **grid, int array_size, int expected_right, int current_row)
-{
-	int	i;
-	int	temp;
-	int	view_count;
-
-	i = array_size - 1;
-	temp = grid[current_row][array_size];
-	view_count = 1;
-	while (i > 0)
-	{
-		if (temp < grid[current_row][i])
-		{
-			view_count++;
-			temp = grid[current_row][i];
-		}
-		i--;
-	}
-	
-	if (view_count == expected_right)
-		return (1);
-	else
-		return(0);
-}
-
-int	ft_calcul_u_d(int **grid, int col, int expected_up, int current_row)
-{
-	int	i;
-	int	view_count;
-	int	temp;
-
-	view_count = 1;
-	
-	temp = grid[0][col];
-	i = 0;
-	while (i < current_row)
-	{
-		if (temp < grid[i][col])
-			view_count++;
-			temp = grid[i][col];
-		i++;
-	}
-	if (view_count <= expected_up)
-		return (1);
-	else
-		return (0);
-}
-
-int	ft_calcul_d_u(int **grid, int col, int expected_down, int current_row)
-{
-	int	i;
-	int	view_count;
-	int	temp;
-
-	view_count = 1;
-	
-	temp = grid[current_row][col];
-	i = current_row - 1;
-	while (i > 0)
-	{
-		if (temp < grid[i][col])
-			view_count++;
-			temp = grid[i][col];
-		i--;
-	}
-	if (view_count <= expected_down)
-		return (1);
-	else
-		return (0);
-}
-
-int	ft_check_repeat(int **grid, int size_hor, int size_ver)
-{
-	int	i;
-	int	j;
-	int	cursor;
-
-	i = 0;
 	while (i < size_hor)
 	{
-		cursor = 0;
-		while (cursor < size_ver)
+		if (temp < grid[current_row][i])
 		{
-			j = 0;
-			while (j < cursor)
-			{
-				if (grid[i][j] == grid[i][cursor])
-					return (0);
-				j++;
-			}
-			cursor++;
+			view_count++;
+			temp = grid[current_row][i];
 		}
 		i++;
 	}
+	
+	if (view_count == exp_left)
+		return (1);
+	else
+		return(0);
+}
+
+int	ft_calcul_right(int **grid, int size_hor, int exp_right, int current_row)
+{
+	int	i;
+	int	temp;
+	int	view_count;
+
+	i = size_hor - 1;
+	temp = grid[current_row][array_size];
+	view_count = 1;
+	while (i >= 0)
+	{
+		if (temp < grid[current_row][i])
+		{
+			view_count++;
+			temp = grid[current_row][i];
+		}
+		i--;
+	}
+	
+	if (view_count == exp_right)
+		return (1);
+	else
+		return(0);
+}
+
+int	ft_calcul_up(int **grid, int size_hor, int exp_up[], int current_row)
+{
+	int	i;
+	int	col;
+	int	view_count;
+	int	temp;
+
+	col = 0;
+	while (col < size_hor)
+	{
+		view_count = 1;
+		temp = grid[0][col];
+		i = 0;
+		while (i < current_row)
+		{
+			if (temp < grid[i][col])
+			{
+				view_count++;
+				temp = grid[i][col];	
+			}
+			i++;
+		}
+		if (view_count > exp_up[col])
+			return (0);
+		col++;	
+	}
+	
+	return (1);
+}
+
+int	ft_calcul_down(int **grid, int size_hor, int exp_down[], int current_row)
+{
+	int	i;
+	int	col;
+	int	view_count;
+	int	temp;
+
+	col = 0;
+	while (col < size_hor)
+	{
+		view_count = 1;
+		temp = grid[current_row][col];
+		i = current_row - 1;
+		while (i >= 0)
+		{
+			if (temp < grid[i][col])
+			{
+				view_count++;
+				temp = grid[i][col];	
+			}
+			i--;
+		}
+		if (view_count > exp_down[col])
+			return (0);
+		col++;	
+	}
+
+
+	return (1);
+}
+
+int	ft_check_repeat(int **grid, int size_hor, int current_row)
+{
+	int	i;
+	int	col;
+	
+	col = 0;
+	while (col < size_hor)
+	{
+		i = 0;
+		while (i < current_row)
+		{
+			if (grid[current_row][col] == grid[i][col])
+				return (0);
+			i++;
+		}
+		col++;
+	}
+	
+	return (1);
+}
+
+int	ft_check_all(int **grid, int size_hor, int current_row, int exp_left, int exp_right, int exp_up[], int exp_down[])
+{
+	if (!(ft_calcul_left(grid, size_hor, exp_left, current_row)))
+		return (0);
+	if (!(ft_calcul_right(grid, size_hor, exp_right, current_row)))
+		return (0);
+	if (!(ft_calcul_up(grid, size_hor, exp_up, current_row)))
+		return (0);
+	if (!(ft_calcul_down(grid, size_hor, exp_down, current_row)))
+		return (0);
+	if (!(ft_check_repeat(grid, size_hor, current_row)))
+		return (0);
 	return (1);
 }
 
