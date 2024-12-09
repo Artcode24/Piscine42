@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/07 11:45:57 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/09 17:13:40 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int	ft_factorial(int nb)
 		return (nb * ft_factorial(nb - 1));
 }
 
-void	ft_fill_poss(int line[], int **poss, int *i, int l, int r)
+void	ft_fill_poss(int charset[], int **poss, int *i, int l, int r)
 {
 	int	j;
 
@@ -186,7 +186,7 @@ void	ft_fill_poss(int line[], int **poss, int *i, int l, int r)
 		j = 0;
 		while (j < 4)
 		{
-			poss[*i][j] = line[j];
+			poss[*i][j] = charset[j];
 			j++;
 		}
 		(*i)++;
@@ -196,9 +196,9 @@ void	ft_fill_poss(int line[], int **poss, int *i, int l, int r)
 		j = l;
 		while (j <= r)
 		{
-			ft_swap(&line[l], &line[j]);
-			ft_fill_poss(line, poss, i, l + 1, r);
-			ft_swap(&line[l], &line[j]);
+			ft_swap(&charset[l], &charset[j]);
+			ft_fill_poss(charset, poss, i, l + 1, r);
+			ft_swap(&charset[l], &charset[j]);
 			j++;
 		}
 	}
@@ -262,16 +262,16 @@ int	**ft_malloc_grid(int size_x, int size_y)
 
 int	main(int argc, char *argv[])
 {
-	int	line[] = {1, 2, 3, 4};
+	int	charset[] = {1, 2, 3, 4};
 	int	line_length = 4;
 	int	**poss;
 	int	**grid;
 	
-	grid = ft_malloc_grid(4, 4); // Modifier le 4 avec une variable
+	grid = ft_malloc_grid(4, 4); // Modifier le 4 avec racine carrée de argc
 	poss = ft_malloc_poss(line_length);
 	
 	int	i = 0;
-	ft_fill_poss(line, poss, &i, 0, line_length - 1);
+	ft_fill_poss(charset, poss, &i, 0, line_length - 1);
 	
 	
 	for (int i = 0, k = 0; i < 4; i++) // On parcours chaque ligne de la grille
