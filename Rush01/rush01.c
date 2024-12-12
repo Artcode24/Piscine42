@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/09 17:13:40 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/12 15:58:51 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_calcul_right(int **grid, int size_hor, int exp_right, int current_row)
 	int	view_count;
 
 	i = size_hor - 1;
-	temp = grid[current_row][array_size];
+	temp = grid[current_row][size_hor];
 	view_count = 1;
 	while (i >= 0)
 	{
@@ -233,20 +233,20 @@ int	**ft_malloc_poss(int size)
 	return (poss);
 }
 
-int	**ft_malloc_grid(int size_x, int size_y)
+int	**ft_malloc_grid(int grid_size)
 {
 	int	**grid;
 	int	i;
 	int	j;
 
-	grid = malloc(size_y * sizeof(int *));
+	grid = malloc(grid_size * sizeof(int *));
 	if (!grid)
 		return (NULL);
 
 	i = 0;
-	while (i < size_x)
+	while (i < grid_size)
 	{
-		grid[i] = malloc(size_x * sizeof(int));
+		grid[i] = malloc(grid_size * sizeof(int));
 		if (!grid[i])
 		{
 			j = 0;
@@ -260,14 +260,75 @@ int	**ft_malloc_grid(int size_x, int size_y)
 	return (grid);
 }
 
+int	**ft_malloc_views(int argc)
+{
+	int	**views;
+	int	i;
+	int	j;
+
+	views = malloc(argc * sizeof(int *));
+	if (!views)
+		return (1);
+
+	i = 0;
+	j = 0;
+	while (i < argc)
+	{
+		views[i] = malloc(sizeof(int));
+		if (!views[i])
+		{
+			while (j < i)
+			{
+				free(views[j++]);
+			}
+			free(views);
+			return (1);
+		}
+		i++;
+	}
+	return (views);
+}
+
+int	ft_atoi(int nb)
+{
+	return (nb -= 48);
+}
+
+int	**ft_get_views(int argc, char *argv[])
+{
+	int	**views;
+	int	i;
+	int	j;
+	int	n;
+
+	views = ft_malloc_views(argc);
+	
+	i = 0;
+	n = 0;
+	while (i < argc / 4)
+	{
+		j = 0;
+		while (j < argc / 4)
+		{
+			views[i][j] = ft_atoi(argv[n][0]);
+			n++;
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	int	charset[] = {1, 2, 3, 4};
 	int	line_length = 4;
 	int	**poss;
 	int	**grid;
+	int	grid_size;
+
+	grid_size = argc / 4;
 	
-	grid = ft_malloc_grid(4, 4); // Modifier le 4 avec racine carrée de argc
+	grid = ft_malloc_grid(grid_size);
 	poss = ft_malloc_poss(line_length);
 	
 	int	i = 0;
