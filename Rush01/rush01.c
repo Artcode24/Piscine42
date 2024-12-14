@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/12 15:58:51 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/14 15:35:44 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,7 @@ int	**ft_malloc_views(int argc)
 
 	views = malloc(argc * sizeof(int *));
 	if (!views)
-		return (1);
+		return (NULL);
 
 	i = 0;
 	j = 0;
@@ -282,7 +282,7 @@ int	**ft_malloc_views(int argc)
 				free(views[j++]);
 			}
 			free(views);
-			return (1);
+			return (NULL);
 		}
 		i++;
 	}
@@ -318,7 +318,7 @@ int	**ft_get_views(int argc, char *argv[])
 	}
 }
 
-int	main(int argc, char *argv[])
+/* int	main(int argc, char *argv[])
 {
 	int	charset[] = {1, 2, 3, 4};
 	int	line_length = 4;
@@ -345,7 +345,7 @@ int	main(int argc, char *argv[])
 			}
 			k++;
 		}
-		while ( /* Conditions not met */ );
+		while (  ); // CONDITIONS NOT MET
 	}
 
 	for (int i = 0; i < 4; i++)
@@ -373,5 +373,5 @@ int	main(int argc, char *argv[])
 			printf("%i", poss[i][j]);
 		}
 		printf("\n");
-	} */
-}
+	}
+} */

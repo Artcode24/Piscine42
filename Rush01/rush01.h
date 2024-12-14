@@ -1,3 +1,8 @@
+#ifndef RUSH01_H
+ #define RUSH01_H
+
+ #include <stdio.h>
+
 int	ft_calcul_left(int **grid, int size_hor, int exp_left, int current_row);
 int	ft_calcul_right(int **grid, int size_hor, int exp_right, int current_row);
 int	ft_calcul_up(int **grid, int size_hor, int exp_up[], int current_row);
@@ -12,3 +17,5 @@ int	**ft_malloc_grid(int grid_size);
 int	**ft_malloc_views(int argc);
 int	ft_atoi(int nb);
 int	**ft_get_views(int argc, char *argv[]);
+
+#endif // RUSH01_H
