@@ -6,14 +6,14 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/14 15:35:44 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:39:02 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_calcul_left(int **grid, int size_hor, int exp_left, int current_row)
+int	ft_calcul_left(int **grid, int size, int exp_left, int current_row)
 {
 	int	i;
 	int	temp;
@@ -22,7 +22,7 @@ int	ft_calcul_left(int **grid, int size_hor, int exp_left, int current_row)
 	i = 0;
 	temp = grid[current_row][0];
 	view_count = 1;
-	while (i < size_hor)
+	while (i < size)
 	{
 		if (temp < grid[current_row][i])
 		{
@@ -38,14 +38,14 @@ int	ft_calcul_left(int **grid, int size_hor, int exp_left, int current_row)
 		return(0);
 }
 
-int	ft_calcul_right(int **grid, int size_hor, int exp_right, int current_row)
+int	ft_calcul_right(int **grid, int size, int exp_right, int current_row)
 {
 	int	i;
 	int	temp;
 	int	view_count;
 
-	i = size_hor - 1;
-	temp = grid[current_row][size_hor];
+	i = size - 1;
+	temp = grid[current_row][size - 1];
 	view_count = 1;
 	while (i >= 0)
 	{
@@ -63,7 +63,7 @@ int	ft_calcul_right(int **grid, int size_hor, int exp_right, int current_row)
 		return(0);
 }
 
-int	ft_calcul_up(int **grid, int size_hor, int exp_up[], int current_row)
+int	ft_calcul_up(int **grid, int size, int exp_up[], int current_row)
 {
 	int	i;
 	int	col;
@@ -71,7 +71,7 @@ int	ft_calcul_up(int **grid, int size_hor, int exp_up[], int current_row)
 	int	temp;
 
 	col = 0;
-	while (col < size_hor)
+	while (col < size)
 	{
 		view_count = 1;
 		temp = grid[0][col];
@@ -81,19 +81,21 @@ int	ft_calcul_up(int **grid, int size_hor, int exp_up[], int current_row)
 			if (temp < grid[i][col])
 			{
 				view_count++;
-				temp = grid[i][col];	
+				temp = grid[i][col];
 			}
 			i++;
 		}
 		if (view_count > exp_up[col])
 			return (0);
-		col++;	
+		if (current_row == size - 1 && view_count != exp_up[col])
+			return (0);
+		col++;
 	}
-	
+
 	return (1);
 }
 
-int	ft_calcul_down(int **grid, int size_hor, int exp_down[], int current_row)
+int	ft_calcul_down(int **grid, int size, int exp_down[], int current_row)
 {
 	int	i;
 	int	col;
@@ -101,7 +103,7 @@ int	ft_calcul_down(int **grid, int size_hor, int exp_down[], int current_row)
 	int	temp;
 
 	col = 0;
-	while (col < size_hor)
+	while (col < size)
 	{
 		view_count = 1;
 		temp = grid[current_row][col];
@@ -124,13 +126,13 @@ int	ft_calcul_down(int **grid, int size_hor, int exp_down[], int current_row)
 	return (1);
 }
 
-int	ft_check_repeat(int **grid, int size_hor, int current_row)
+int	ft_check_repeat(int **grid, int size, int current_row)
 {
 	int	i;
 	int	col;
 	
 	col = 0;
-	while (col < size_hor)
+	while (col < size)
 	{
 		i = 0;
 		while (i < current_row)
@@ -301,7 +303,7 @@ int	**ft_get_views(int argc, char *argv[])
 	int	j;
 	int	n;
 
-	views = ft_malloc_views(argc);
+	views = ft_malloc_views((argc / 4) * sizeof(int *));
 	
 	i = 0;
 	n = 0;
@@ -316,6 +318,7 @@ int	**ft_get_views(int argc, char *argv[])
 		}
 		i++;
 	}
+	return (views);
 }
 
 /* int	main(int argc, char *argv[])

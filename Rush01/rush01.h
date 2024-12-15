@@ -1,8 +1,6 @@
 #ifndef RUSH01_H
  #define RUSH01_H
 
- #include <stdio.h>
-
 int	ft_calcul_left(int **grid, int size_hor, int exp_left, int current_row);
 int	ft_calcul_right(int **grid, int size_hor, int exp_right, int current_row);
 int	ft_calcul_up(int **grid, int size_hor, int exp_up[], int current_row);
