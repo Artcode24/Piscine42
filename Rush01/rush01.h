@@ -16,4 +16,6 @@ int	**ft_malloc_views(int argc);
 int	ft_atoi(int nb);
 int	**ft_get_views(int argc, char *argv[]);
 
+int	ft_calcul_up_c(int **grid, int size, int exp_up[], int current_row);
+
 #endif // RUSH01_H

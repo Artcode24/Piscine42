@@ -139,6 +139,35 @@ void	test_calcul_up(void)
 	free(grid);
 }
 
+void	test_calcul_up_c(void)
+{
+	int **grid = ft_create_grid();
+	int exp_up[] = {4, 3, 2, 1};
+	int exp_up_false[] = {1, 4, 3, 2};
+	
+	if (ft_calcul_up_c(grid, 4, exp_up, 0) == true)
+		printf("ft_calcul_up :) OK - Expected (TRUE) Returned (TRUE)\n");
+	else
+		printf("ft_calcul_up :( KO - Expected (TRUE) Returned (FALSE)\n");
+
+	if (ft_calcul_up_c(grid, 4, exp_up_false, 0) == false)
+		printf("ft_calcul_up :) OK - Expected (FALSE) Returned (FALSE)\n");
+	else
+		printf("ft_calcul_up :( KO - Expected (FALSE) Returned (TRUE)\n");
+
+	if (ft_calcul_up_c(grid, 4, exp_up, 2) == true)
+		printf("ft_calcul_up :) OK - Expected (TRUE) Returned (TRUE)\n");
+	else
+		printf("ft_calcul_up :( KO - Expected (TRUE) Returned (FALSE)\n");
+
+	if (ft_calcul_up_c(grid, 4, exp_up_false, 2) == false)
+		printf("ft_calcul_up :) OK - Expected (FALSE) Returned (FALSE)\n");
+	else
+		printf("ft_calcul_up :( KO - Expected (FALSE) Returned (TRUE)\n");
+
+	free(grid);
+}
+
 int	main(void)
 {
 /* 	test_factorial();
@@ -146,6 +175,7 @@ int	main(void)
 	test_calcul_left();
 	printf("\n");
 	test_calcul_right();
-	printf("\n"); */
+	printf("\n");
+	test_calcul_up_c(); */
 	test_calcul_up();
 }

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/15 17:39:02 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/17 01:52:24 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,26 @@ int	ft_calcul_up(int **grid, int size, int exp_up[], int current_row)
 		col++;
 	}
 
+	return (1);
+}
+
+int	ft_calcul_up_c(int **grid, int size, int exp_up[], int current_row)
+{
+	int	temp;
+	int	view_count;
+
+	for (int col = 0; col < size; col++)
+	{
+		view_count = 1;
+		for (int row = 0; row < size; row++)
+		{
+			temp = grid[0][col];
+			if (temp < grid[row][col])
+				view_count++;
+		}
+		if (view_count != exp_up[col])
+			return (0);
+	}
 	return (1);
 }
 
