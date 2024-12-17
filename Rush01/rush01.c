@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/17 01:52:24 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/17 16:55:38 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,59 +65,33 @@ int	ft_calcul_right(int **grid, int size, int exp_right, int current_row)
 
 int	ft_calcul_up(int **grid, int size, int exp_up[], int current_row)
 {
-	int	i;
-	int	col;
-	int	view_count;
-	int	temp;
-
-	col = 0;
-	while (col < size)
-	{
-		view_count = 1;
-		temp = grid[0][col];
-		i = 0;
-		while (i < current_row)
-		{
-			if (temp < grid[i][col])
-			{
-				view_count++;
-				temp = grid[i][col];
-			}
-			i++;
-		}
-		if (view_count > exp_up[col])
-			return (0);
-		if (current_row == size - 1 && view_count != exp_up[col])
-			return (0);
-		col++;
-	}
-
-	return (1);
-}
-
-int	ft_calcul_up_c(int **grid, int size, int exp_up[], int current_row)
-{
 	int	temp;
 	int	view_count;
 
 	for (int col = 0; col < size; col++)
 	{
 		view_count = 1;
-		for (int row = 0; row < size; row++)
+		for (int row = 0; row <= current_row; row++)
 		{
 			temp = grid[0][col];
 			if (temp < grid[row][col])
+			{
 				view_count++;
+				temp = grid[row][col];
+			}
 		}
-		if (view_count != exp_up[col])
+		if (view_count > exp_up[col])
 			return (0);
+		if (current_row == size - 1 && view_count != exp_up[col])
+			return (0);
+		
 	}
 	return (1);
 }
 
 int	ft_calcul_down(int **grid, int size, int exp_down[], int current_row)
 {
-	int	i;
+	int	row;
 	int	col;
 	int	view_count;
 	int	temp;
@@ -127,17 +101,19 @@ int	ft_calcul_down(int **grid, int size, int exp_down[], int current_row)
 	{
 		view_count = 1;
 		temp = grid[current_row][col];
-		i = current_row - 1;
-		while (i >= 0)
+		row = current_row - 1;
+		while (row >= 0)
 		{
-			if (temp < grid[i][col])
+			if (temp < grid[row][col])
 			{
 				view_count++;
-				temp = grid[i][col];	
+				temp = grid[row][col];	
 			}
-			i--;
+			row--;
 		}
 		if (view_count > exp_down[col])
+			return (0);
+		if (current_row == size - 1 && view_count != exp_down[col])
 			return (0);
 		col++;	
 	}
@@ -148,18 +124,18 @@ int	ft_calcul_down(int **grid, int size, int exp_down[], int current_row)
 
 int	ft_check_repeat(int **grid, int size, int current_row)
 {
-	int	i;
+	int	row;
 	int	col;
 	
 	col = 0;
 	while (col < size)
 	{
-		i = 0;
-		while (i < current_row)
+		row = 0;
+		while (row < current_row)
 		{
-			if (grid[current_row][col] == grid[i][col])
+			if (grid[current_row][col] == grid[row][col])
 				return (0);
-			i++;
+			row++;
 		}
 		col++;
 	}
@@ -378,7 +354,7 @@ int	**ft_get_views(int argc, char *argv[])
 
 
 
-/* 	// Affiche la grille
+ 	// Affiche la grille
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -386,10 +362,10 @@ int	**ft_get_views(int argc, char *argv[])
 			printf("%d ", grid[i][j]);
 		}
 		printf("\n");
-	} */
+	}
 
 	// Affiche toutes les possibilites
-/* 	for (int i = 0; i < 24; i++) // 24 est hardcode et est egal a ft_factorial
+ 	for (int i = 0; i < 24; i++) // 24 est hardcode et est egal a ft_factorial
 	{
 		for (int j = 0; j < 4; j++)
 		{
