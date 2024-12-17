@@ -274,20 +274,20 @@ void	test_atoi(void)
 
 int	main(void)
 {
-	// printf("\n\n");
-	// test_factorial();
-	// printf("\n");
-	// test_calcul_left();
-	// printf("\n");
-	// test_calcul_right();
-	// printf("\n");
-	// test_calcul_up();
-	// printf("\n");
-	// test_calcul_down();
-	// printf("\n");
-	// test_check_repeat();
-	// printf("\n");
-	// test_swap();
-	// printf("\n");
+	printf("\n");
+	test_factorial();
+	printf("\n");
+	test_calcul_left();
+	printf("\n");
+	test_calcul_right();
+	printf("\n");
+	test_calcul_up();
+	printf("\n");
+	test_calcul_down();
+	printf("\n");
+	test_check_repeat();
+	printf("\n");
+	test_swap();
+	printf("\n");
 	test_atoi();
 }

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rush01.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 14:57:43 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/17 16:55:38 by arthur           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -84,7 +72,6 @@ int	ft_calcul_up(int **grid, int size, int exp_up[], int current_row)
 			return (0);
 		if (current_row == size - 1 && view_count != exp_up[col])
 			return (0);
-		
 	}
 	return (1);
 }
