@@ -55,7 +55,7 @@ int	**ft_create_grid_false(void)
 	}
 
 	grid[0][0] = 1; grid[0][1] = 2; grid[0][2] = 3; grid[0][3] = 4;
-	grid[1][0] = 1; grid[1][1] = 3; grid[1][2] = 4; grid[1][3] = 1;
+	grid[1][0] = 2; grid[1][1] = 3; grid[1][2] = 4; grid[1][3] = 1;
 	grid[2][0] = 2; grid[2][1] = 4; grid[2][2] = 1; grid[2][3] = 2;
 	grid[3][0] = 4; grid[3][1] = 1; grid[3][2] = 2; grid[3][3] = 3;
 
@@ -248,6 +248,30 @@ void	test_check_repeat(void)
 	ft_free_grid(grid_false);
 }
 
+void	test_swap(void)
+{
+	int	a = 42;
+	int	b = 24;
+
+	ft_swap(&a, &b);
+
+	if (a == 24 && b == 42)
+		printf("ft_swap :) OK - Expected (a == 24, b == 42) Returned (a == %d, b == %d)\n", a, b);
+	else
+		printf("ft_swap :( KO - Expected (a == 24, b == 42) Returned (a == %d, b == %d)\n", a, b);
+
+}
+
+void	test_atoi(void)
+{
+	char c = '4';
+
+	if (ft_atoi(c) == 4)
+		printf("ft_atoi :) OK - Expected (4) Returned (%d)\n", ft_atoi(c));
+	else
+		printf("ft_atoi :( K0 - Expected (4) Returned (%d)\n", ft_atoi(c));
+}
+
 int	main(void)
 {
 	// printf("\n\n");
@@ -261,5 +285,9 @@ int	main(void)
 	// printf("\n");
 	// test_calcul_down();
 	// printf("\n");
-	test_check_repeat();
+	// test_check_repeat();
+	// printf("\n");
+	// test_swap();
+	// printf("\n");
+	test_atoi();
 }
