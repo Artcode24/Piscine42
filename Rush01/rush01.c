@@ -162,7 +162,7 @@ int	ft_factorial(int nb)
 		return (nb * ft_factorial(nb - 1));
 }
 
-void	ft_fill_poss(int charset[], int **poss, int *i, int l, int r)
+void	ft_fill_poss(int charset[], int **poss_grid, int *i, int l, int r)
 {
 	int	j;
 
@@ -171,7 +171,7 @@ void	ft_fill_poss(int charset[], int **poss, int *i, int l, int r)
 		j = 0;
 		while (j < 4)
 		{
-			poss[*i][j] = charset[j];
+			poss_grid[*i][j] = charset[j];
 			j++;
 		}
 		(*i)++;
@@ -182,7 +182,7 @@ void	ft_fill_poss(int charset[], int **poss, int *i, int l, int r)
 		while (j <= r)
 		{
 			ft_swap(&charset[l], &charset[j]);
-			ft_fill_poss(charset, poss, i, l + 1, r);
+			ft_fill_poss(charset, poss_grid, i, l + 1, r);
 			ft_swap(&charset[l], &charset[j]);
 			j++;
 		}
@@ -191,31 +191,31 @@ void	ft_fill_poss(int charset[], int **poss, int *i, int l, int r)
 
 int	**ft_malloc_poss(int size)
 {
-	int	**poss;
+	int	**poss_grid;
 	int	nb_poss;
 	int	i;
 	int	j;
 	
 	nb_poss = ft_factorial(size);
-	poss = malloc(nb_poss * sizeof(int *));
-	if (!poss)
+	poss_grid = malloc(nb_poss * sizeof(int *));
+	if (!poss_grid)
 		return (NULL);
 
 	i = 0;
 	while (i < nb_poss)
 	{
-		poss[i] = malloc(size * sizeof(int));
-  		if (!poss[i])
+		poss_grid[i] = malloc(size * sizeof(int));
+  		if (!poss_grid[i])
 		{
 			j = 0;
 			while (j < i)
-				free(poss[j++]);
-			free(poss);
+				free(poss_grid[j++]);
+			free(poss_grid);
 			return (NULL);
 		}
 		i++;
 	}
-	return (poss);
+	return (poss_grid);
 }
 
 int	**ft_malloc_grid(int grid_size)
