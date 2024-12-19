@@ -272,22 +272,73 @@ void	test_atoi(void)
 		printf("ft_atoi :( K0 - Expected (4) Returned (%d)\n", ft_atoi(c));
 }
 
-int	main(void)
+void	test_create_poss(void)
 {
-	// printf("\n");
-	// test_factorial();
-	// printf("\n");
-	// test_calcul_left();
-	// printf("\n");
-	// test_calcul_right();
-	// printf("\n");
-	// test_calcul_up();
-	// printf("\n");
-	// test_calcul_down();
-	// printf("\n");
-	// test_check_repeat();
-	// printf("\n");
-	// test_swap();
-	// printf("\n");
-	// test_atoi();
+	int	**poss_grid = ft_malloc_poss(4);
+
+	int	i = 0;
+	int	charset[] = {1, 2, 3, 4};
+	int	size = 4;
+
+	ft_fill_poss(charset, poss_grid, &i, 0, size - 1);
+
+	printf("possibilities :) KK\n");
+	for (int i = 0; i < 24; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			printf("%d ", poss_grid[i][j]);
+		}
+		printf(" - (%d)", i + 1);
+		printf("\n");
+	}
+}
+
+void	test_create_views(int argc, char *argv[])
+{
+	int	**views = ft_get_views(argc, argv);
+
+	printf("possibilities :) KK\n");
+ 	for (int i = 0; i < (argc - 1) / 4; i++)
+	{
+		if (i == 0)
+			printf("UP:    ");
+		else if (i == 1)
+			printf("DOWN:  ");
+		else if (i == 2)
+			printf("LEFT:  ");
+		else if (i == 3)
+			printf("RIGHT: ");
+
+		for (int j = 0; j < (argc - 1) / 4; j++)
+		{
+			printf("%d ", views[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+int	main(int argc, char *argv[])
+{
+	printf("\n");
+	test_factorial();
+	printf("\n");
+	test_calcul_left();
+	printf("\n");
+	test_calcul_right();
+	printf("\n");
+	test_calcul_up();
+	printf("\n");
+	test_calcul_down();
+	printf("\n");
+	test_check_repeat();
+	printf("\n");
+	test_swap();
+	printf("\n");
+	test_atoi();
+	printf("\n");
+	test_create_poss();
+	printf("\n");
+	test_create_views(argc, argv);
+	printf("\n");
 }
