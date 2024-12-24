@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: agouzy <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 01:38:27 by agouzy            #+#    #+#             */
-/*   Updated: 2024/12/22 21:32:36 by arthur           ###   ########.fr       */
+/*   Created: 2024/10/23 03:44:26 by agouzy            #+#    #+#             */
+/*   Updated: 2024/10/23 03:46:10 by agouzy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
+int	ft_strlen(char *str)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
 }
 
 /*
 #include <stdio.h>
 int	main(void)
 {
-	char	*src = "Hello world";
-	char	dest[12];
-	
-	printf("src = %s, dest = %s\n", src, ft_strcpy(dest, src));
+	printf("%i", ft_strlen("Hello"));
 }
 */

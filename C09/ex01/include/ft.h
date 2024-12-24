@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 01:38:27 by agouzy            #+#    #+#             */
-/*   Updated: 2024/12/22 21:32:36 by arthur           ###   ########.fr       */
+/*   Created: 2024/12/24 00:37:36 by arthur            #+#    #+#             */
+/*   Updated: 2024/12/24 01:05:00 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
+#ifndef FT_H
+# define FT_H
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
+void	ft_putchar(char c);
+void	ft_swap(int *a, int *b);
+void	ft_putstr(char *str);
+int		ft_strlen(char *str);
+int		ft_strcmp(char *s1, char *s2);
 
-/*
-#include <stdio.h>
-int	main(void)
-{
-	char	*src = "Hello world";
-	char	dest[12];
-	
-	printf("src = %s, dest = %s\n", src, ft_strcpy(dest, src));
-}
-*/
+#endif // FT_H

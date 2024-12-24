@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: agouzy <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 01:38:27 by agouzy            #+#    #+#             */
-/*   Updated: 2024/12/22 21:32:36 by arthur           ###   ########.fr       */
+/*   Created: 2024/10/16 01:01:31 by agouzy            #+#    #+#             */
+/*   Updated: 2024/10/16 01:04:44 by agouzy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
+void	ft_swap(int *a, int *b)
 {
-	int	i;
+	int	temp;
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
 /*
 #include <stdio.h>
 int	main(void)
 {
-	char	*src = "Hello world";
-	char	dest[12];
+	int	a;
+	int	b;
+
+	a = 3;
+	b = 8;
 	
-	printf("src = %s, dest = %s\n", src, ft_strcpy(dest, src));
+	ft_swap(&a, &b);
+	printf("a = %i, b = %i\n", a, b);
 }
 */

@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: agouzy <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 01:38:27 by agouzy            #+#    #+#             */
-/*   Updated: 2024/12/22 21:32:36 by arthur           ###   ########.fr       */
+/*   Created: 2024/10/23 03:46:29 by agouzy            #+#    #+#             */
+/*   Updated: 2024/10/23 03:48:25 by agouzy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
+#include <unistd.h>
+
+void	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	while (str[i] != '\0')
+		write(1, &str[i++], 1);
 }
 
 /*
 #include <stdio.h>
 int	main(void)
 {
-	char	*src = "Hello world";
-	char	dest[12];
-	
-	printf("src = %s, dest = %s\n", src, ft_strcpy(dest, src));
+	ft_putstr("Hello!");
 }
 */
