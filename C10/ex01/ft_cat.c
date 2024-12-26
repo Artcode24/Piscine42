@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 23:34:35 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/26 00:47:44 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/26 17:29:31 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
+#include <libgen.h>
 
-#define BUFF_SIZE 1024
+#define BUFF_SIZE 30720
 
-void	ft_putstr(char *str)
+void	ft_printerror(char *str)
 {
 	int	i;
 
@@ -29,58 +30,35 @@ void	ft_putstr(char *str)
 	}
 }
 
-// Create ft_display_file function
-// 
+void	ft_display_file(char *file)
+{
+	int	fd;
+	ssize_t numRead;
+	char	buf[BUFF_SIZE];
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printerror(strerror(errno));
+		ft_printerror(": ");
+		ft_printerror(basename(file));
+		ft_printerror("\n");
+	}
+
+	numRead = read(fd, buf, BUFF_SIZE);
+
+	while (numRead > 0)
+	{
+		write(1, buf, numRead);
+		numRead = read(fd, buf, BUFF_SIZE);
+	}
+	close(fd);
+}
 
 int	main(int argc, char *argv[])
 {
-	int	fd;
 	int	i;
-	char	buf[BUFF_SIZE];
-	char	str[12];
-	ssize_t numRead;
 
 	i = 1;
-
-	fd = open(argv[i], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr(strerror(errno));
-		return (1);
-	}
-	else
-	{
-		numRead = read(fd, buf, BUFF_SIZE);
-
-		while (numRead > 0)
-		{
-			write(1, buf, numRead);
-			numRead = read(fd, buf, BUFF_SIZE);
-		}
-		close(fd);
-	}
-	i++;
-	
-	while (i < argc)
-	{
-		fd = open(argv[i], O_RDONLY);
-		if (fd == -1)
-		{
-			ft_putstr(strerror(errno));
-			return (1);
-		}
-		else
-		{
-			numRead = read(fd, buf, BUFF_SIZE);
-
-			while (numRead > 0)
-			{
-				write(1, buf, numRead);
-				numRead = read(fd, buf, BUFF_SIZE);
-			}
-			close(fd);
-		}
-		i++;
-	}
-	
+	ft_display_file(argv[i]);
 }
