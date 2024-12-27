@@ -1,14 +1,1 @@
-this is
-a simple
-example
-of an
-implementation
-of
-a cute
-program
-that prints
-10 lines
-exactly
-the 10
-last lines
-of a program
+Hey I'm doing fine, thx!

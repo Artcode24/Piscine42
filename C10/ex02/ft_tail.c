@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:37:56 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/27 17:32:17 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/27 23:28:38 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,97 +16,81 @@
 #include <string.h>
 #include <libgen.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-#define BUFF_SIZE 1024
-
-int	ft_count_n(char *str)
+int	ft_atoi(char *s)
 {
-	int	i;
-	int	n;
-
-	i = 0;
-	n = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\n')
-			n++;
-		i++;
-	}
-	return (n);
+	
 }
 
-void	ft_printerror(char *str)
+void	ft_print_error(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
-	{
+	while (str[i++] != '\0')
 		write(2, &str[i], 1);
-		i++;
-	}
 }
 
-void	ft_putstr(char *str, int count)
-{
-	int	i;
-	int	n;
-
-	n = 0;
-	count -= 10;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
-
-int	main(int argc, char *argv[])
+char	*ft_display_file(char *file, char *to_read, int n)
 {
 	int	fd;
-	int	i;
-	char	buf[BUFF_SIZE];
 	ssize_t	num_read;
-	int	n;
-	int	count;
+	char	buf[n];
+	char	temp[n];
+	int 	i;
+	int	current_index;
 
-	i = 1;
-	count = 0;
-	
-	fd = open(argv[i], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printerror(strerror(errno));
-		ft_printerror(": ");
-		ft_printerror(basename(argv[i]));
-		ft_printerror("\n");
+		ft_print_error(strerror(errno));
+		ft_print_error(basename(file));
 	}
 	else
 	{
-		num_read = read(fd, buf, BUFF_SIZE);
+		num_read = read(fd, buf, n);
 
 		while (num_read > 0)
 		{
-			n = ft_count_n(buf);
-			num_read = read(fd, buf, BUFF_SIZE);
+			current_index = 0;
+			while (current_index < num_read)
+			{
+				temp[current_index] = buf[current_index];
+				current_index++;
+			}
+				
+			num_read = read(fd, buf, n);
 		}
 
-		num_read = read(fd, buf, BUFF_SIZE);
-		while (num_read > 0)
+		i = 0;
+		while (i < n)
 		{
-			ft_putstr(buf, 10);
-			num_read = read(fd, buf, BUFF_SIZE);
+			to_read[i] = temp[current_index % n];
+			i++;
+			current_index++;
 		}
 	}
-	close(fd);
+	return (to_read);
+}
 
-	fd = open(argv[i], O_RDONLY);
-	num_read = read(fd, buf, BUFF_SIZE);
-	while (num_read > 0)
-	{	
-		write(1, buf, num_read);
-		num_read = read(fd, buf, BUFF_SIZE);
+int main(int argc, char *argv[])
+{
+	char	*to_read;
+	int	i;
+	int	j;
+	int	n;
+
+	n = ft_atoi(argv[2]);
+
+	to_read = malloc(sizeof(char) * n);
+	
+	i = 3;
+	to_read = ft_display_file(argv[i], to_read, n);
+
+	j = 0;
+	while (j < n)
+	{
+		write(1, &to_read[j++], 1);
 	}
-	close(fd);	
 }
