@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 19:35:00 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/25 23:42:01 by arthur           ###   ########.fr       */
+/*   Updated: 2024/12/27 01:00:16 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char *argv[])
 {
 	int	fd;
 	char	buf[BUFF_SIZE];
-	ssize_t numRead;
+	ssize_t num_read;
 
 	if (argc < 2)
 	{
@@ -50,12 +50,12 @@ int	main(int argc, char *argv[])
 
 	if (fd != -1)
 	{
-		numRead = read(fd, buf, BUFF_SIZE);
+		num_read = read(fd, buf, BUFF_SIZE);
 
-		while (numRead > 0)
+		while (num_read > 0)
 		{
-			write(1, buf, numRead);
-			numRead = read(fd, buf, BUFF_SIZE);
+			write(1, buf, num_read);
+			num_read = read(fd, buf, BUFF_SIZE);
 		}
 	}
 	else

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cat.c                                           :+:      :+:    :+:   */
+/*   ft_tail.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 23:34:35 by arthur            #+#    #+#             */
-/*   Updated: 2024/12/27 01:13:32 by arthur           ###   ########.fr       */
+/*   Created: 2024/12/27 00:37:56 by arthur            #+#    #+#             */
+/*   Updated: 2024/12/27 01:29:59 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,57 +15,41 @@
 #include <errno.h>
 #include <string.h>
 #include <libgen.h>
+#include <stdlib.h>
 
-#define BUFF_SIZE 30720
+#define BUFF_SIZE 1024
 
-void	ft_printerror(char *str)
+void	ft_putstr(int display, char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		write(2, &str[i], 1);
+		write(display, &str[i], 1);
 		i++;
 	}
-}
-
-void	ft_display_file(char *file)
-{
-	int	fd;
-	ssize_t num_read;
-	char	buf[BUFF_SIZE];
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printerror(strerror(errno));
-		ft_printerror(": ");
-		ft_printerror(basename(file));
-		ft_printerror("\n");
-	}
-	else
-	{
-		num_read = read(fd, buf, BUFF_SIZE);
-
-		while (num_read > 0)
-		{
-			write(1, buf, num_read);
-			num_read = read(fd, buf, BUFF_SIZE);
-		}
-		close(fd);
-	}
-
 }
 
 int	main(int argc, char *argv[])
 {
+	int	fd;
 	int	i;
+	char	buf[BUFF_SIZE];
+	ssize_t	num_read;
 
 	i = 1;
-	while (i < argc)
+	
+	fd = open(argv[i], O_RDONLY);
+	if (fd == -1)
 	{
-		ft_display_file(argv[i]);
-		i++;
+		ft_putstr(2, strerror(errno));
+		ft_putstr(2, ": ");
+		ft_putstr(2, basename(argv[i]));
+		ft_putstr(2, "\n");
+	}
+	else
+	{
+		// read ...
 	}
 }
