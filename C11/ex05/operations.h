@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_boolean.h                                       :+:      :+:    :+:   */
+/*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 03:51:04 by arthur            #+#    #+#             */
-/*   Updated: 2025/01/03 01:47:50 by arthur           ###   ########.fr       */
+/*   Created: 2025/01/03 01:49:51 by arthur            #+#    #+#             */
+/*   Updated: 2025/01/03 01:50:51 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_BOOLEAN_H
-# define FT_BOOLEAN_H
+#ifndef OPERATIONS_H
+# define OPERATIONS_H
 
-# include <unistd.h>
+int	ft_mod(int a, int b);
+int	ft_mul(int a, int b);
+int	ft_div(int a, int b);
+int	ft_sub(int a, int b);
+int	ft_add(int a, int b);
 
-# define EVEN_MSG "I have an even number of arguments\n"
-# define ODD_MSG "I have an odd number of arguments\n"
-# define SUCCESS (0)
-# define EVEN(nbr) (nbr % 2 == 0)
-# define TRUE (1)
-# define FALSE (0)
-
-typedef int	t_bool;
-
-#endif // FT_BOOLEAN_H
+#endif // OPERATIONS_H

@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_boolean.h                                       :+:      :+:    :+:   */
+/*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 03:51:04 by arthur            #+#    #+#             */
-/*   Updated: 2025/01/03 01:47:50 by arthur           ###   ########.fr       */
+/*   Created: 2025/01/03 01:41:07 by arthur            #+#    #+#             */
+/*   Updated: 2025/01/03 01:41:22 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_BOOLEAN_H
-# define FT_BOOLEAN_H
+int	ft_mod(int a, int b)
+{
+	return (a % b);
+}
 
-# include <unistd.h>
+int	ft_mul(int a, int b)
+{
+	return (a * b);
+}
 
-# define EVEN_MSG "I have an even number of arguments\n"
-# define ODD_MSG "I have an odd number of arguments\n"
-# define SUCCESS (0)
-# define EVEN(nbr) (nbr % 2 == 0)
-# define TRUE (1)
-# define FALSE (0)
+int	ft_div(int a, int b)
+{
+	return (a / b);
+}
 
-typedef int	t_bool;
+int	ft_sub(int a, int b)
+{
+	return (a - b);
+}
 
-#endif // FT_BOOLEAN_H
+int	ft_add(int a, int b)
+{
+	return (a + b);
+}
