@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 02:36:25 by arthur            #+#    #+#             */
-/*   Updated: 2024/11/11 03:20:22 by arthur           ###   ########.fr       */
+/*   Updated: 2025/01/16 15:02:26 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_split(char *str, char *charset)
 	int		j;
 	int		start;
 	char	**arr;
-
+	
 	i = 0;
 	j = 0;
 	start = 0;
