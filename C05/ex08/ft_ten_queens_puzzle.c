@@ -6,118 +6,98 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 00:51:30 by arthur            #+#    #+#             */
-/*   Updated: 2025/01/31 07:10:59 by arthur           ###   ########.fr       */
+/*   Updated: 2025/02/02 08:26:33 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
+#include "ft_ten_queens_puzzle.h"
 
-#define SIZE 10
+int	g_grid[10][10];
+int	g_count = 0;
 
-int g_grid[10][10];
-int c_count = 0;
+int	row_is_f(int row);
+int	diag_l_is_f(int row, int col);
+int	diag_r_is_f(int row, int col);
 
-void init_grid(void)
+void	init_grid(void)
 {
-    for (int i = 0; i < SIZE; i++)
-    {
-        for (int j = 0; j < SIZE; j++)
-        {
-            g_grid[i][j] = 0;
-        }
-    }
-}
+	int	i;
+	int	j;
 
-int row_is_filled(int row)
-{
-    for (int i = 0; i < SIZE; i++)
-    {
-        if (g_grid[row][i] == 1)
-            return (1);
-    }
-    return (0);
-}
-
-int diag_left_is_filled(int row, int col)
-{
-	for (int i = row + 1, j = col + 1; i < SIZE && j < SIZE; i++, j++)
+	i = 0;
+	while (i < SIZE)
 	{
-		if (g_grid[i][j] == 1)
-			return (1);
-	}
-
-	for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
-	{
-		if (g_grid[i][j] == 1)
-			return (1);
-	}
-	
-	return (0);
-}
-
-int diag_right_is_filled(int row, int col)
-{
-	for (int i = row - 1, j = col + 1; i < SIZE && j < SIZE; i--, j++)
-	{
-		if (g_grid[i][j] == 1)
-			return (1);
-	}
-
-	for (int i = row + 1, j = col -1; i < SIZE && j < SIZE; i++, j--)
-	{
-		if (g_grid[i][j] == 1)
-			return (1);
-	}
-	
-	return (0);
-}
-
-void	print_positions()
-{
-	for (int col = 0; col < SIZE; col++)
-	{
-		for (int row = 0; row < SIZE; row++)
+		j = 0;
+		while (j < SIZE)
 		{
-			if(g_grid[row][col])
-			{
-				printf("%d", row);
-			}
+			g_grid[i][j] = 0;
+			j++;
 		}
+		i++;
 	}
-	printf("\n");
 }
 
-void solve(int col)
+void	print_positions(void)
 {
-    if (col == SIZE) // Toutes les colonnes sont remplies
-    {
-	c_count++;
-	print_positions();
-    }
+	int		col;
+	int		row;
+	char	c;
 
-    for (int row = 0; row < SIZE; row++) // Parcourir les lignes
-    {
-        if (!row_is_filled(row) && !diag_left_is_filled(row, col) && !diag_right_is_filled(row, col))
-        {
-		g_grid[row][col] = 1;
-		solve(col + 1);
-		g_grid[row][col] = 0;
-        }
-    }
+	col = 0;
+	while (col < SIZE)
+	{
+		row = 0;
+		while (row < SIZE)
+		{
+			if (g_grid[row][col])
+			{
+				c = row + '0';
+				write(1, &c, 1);
+			}
+			row++;
+		}
+		col++;
+	}
+	write(1, "\n", 1);
 }
 
-int ft_ten_queens_puzzle(void)
+void	solve(int col)
+{
+	int	row;
+
+	if (col == SIZE)
+	{
+		g_count++;
+		print_positions();
+	}
+	row = 0;
+	while (row < SIZE)
+	{
+		if (!row_is_f(row) && !diag_l_is_f(row, col) && !diag_r_is_f(row, col))
+		{
+			g_grid[row][col] = 1;
+			solve(col + 1);
+			g_grid[row][col] = 0;
+		}
+		row++;
+	}
+}
+
+int	ft_ten_queens_puzzle(void)
 {
 	solve(0);
-	return (c_count);
+	return (g_count);
 }
 
 /* 
 int 	main(void)
 {
 	init_grid();
-	int count = ft_ten_queens_puzzle();
+	int count;
+
+	count = ft_ten_queens_puzzle();
 	printf("\n%d\n", count);
 	return (0);
-} 
- */
+}
+*/

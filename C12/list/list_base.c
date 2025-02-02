@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:41:04 by arthur            #+#    #+#             */
-/*   Updated: 2025/01/13 02:04:24 by arthur           ###   ########.fr       */
+/*   Updated: 2025/02/02 09:37:57 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,81 +17,61 @@
 t_list	*ft_create_element(void *);
 void	ft_list_push_front(t_list **, void *);
 t_list	*ft_list_last(t_list *);
-void ft_list_push_back(t_list **, void *);
+void	ft_list_push_back(t_list **, void *);
 
 
 
 int	main(void)
 {
-	t_list *head;
-	int	a, b, c, d;
-
-	a = 42, b = 24, c = 48, d = 25;
-
-	head = NULL;
-
-	ft_list_push_front(&head, &a);
-	ft_list_push_front(&head, &b);
-	ft_list_push_front(&head, &c);
-
-	ft_list_push_back(&head, &d);
-
 	
-	t_list *last = ft_list_last(head);
-	
-	printf("%d", *(int *)last->data);
-}
-
-void ft_list_push_back(t_list **begin_list, void *data)
-{
-	t_list *ptr;
-	t_list *new_elem;
-
-	ptr = *begin_list;
-	new_elem = ft_create_element(data);
-
-	while (ptr->next != NULL)
-	{
-		ptr = ptr->next;
-	}
-	
-	ptr->next = new_elem;
 }
 
 t_list	*ft_create_element(void *data)
 {
-	t_list	*elem;
+	t_list	*new_elem;
 
-	elem = malloc(sizeof(t_list));
-	if (!elem)
+	new_elem = (t_list *)malloc(sizeof(t_list));
+	if (!new_elem)
 		return (NULL);
 	
-	elem->data = data;
-	elem->next = NULL;
+	new_elem->data = data;
+	new_elem->next = NULL;
 
-	return (elem);
+	return (new_elem);
 }
 
 void	ft_list_push_front(t_list **begin_list, void *data)
 {
-	t_list *new_element;
+	t_list	*new_elem;
 
-	new_element = ft_create_element(data);
+	new_elem = ft_create_element(data);
 
-	new_element->next = *begin_list;
-	*begin_list = new_element;
+	new_elem->next = *begin_list;
+	*begin_list = new_elem;
 }
+
+int	ft_list_size(t_list *begin_list)
+{
+	t_list	*ptr;
+	int	count;
+
+	ptr = begin_list;
+	count = 0;	
+	while (ptr)	
+	{
+		ptr = ptr->next;
+		count++;
+	}
+	return (count);
+}
+
+void ft_list_push_back(t_list **begin_list, void *data)
+{
+
+}
+
 
 t_list	*ft_list_last(t_list *begin_list)
 {
-	t_list	*ptr;
 
-	ptr = begin_list;
-
-	while (ptr->next != NULL)
-	{
-		ptr = ptr->next;
-	}
-
-	return (ptr);
 }
